@@ -72,9 +72,9 @@ class OnResponseHandler
 				$httpRequest = new Http\Request($url);
 
 				if ($this->router->match($httpRequest) !== NULL) {
-					$prop = new Property('Nette\Application\Application', 'httpRequest');
-					$prop->setAccessible(TRUE);
-					$prop->setValue($application, $httpRequest);
+					$refProp = new \ReflectionProperty(\Nette\Application\Application::class, 'httpRequest');
+					$refProp->setAccessible(TRUE);
+					$refProp->setValue($application, $httpRequest);
 
 					$application->run();
 					exit;
